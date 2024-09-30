@@ -1,9 +1,8 @@
 name: Send Email Notification
 
 on:
-  push:
-    branches:
-      - main  # or any branch you want to monitor
+  workflow_dispatch:
+
 
 jobs:
   send_email:
