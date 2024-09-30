@@ -30,7 +30,7 @@ jobs:
 
             Check the repository for more details.
 
-          to: your-email@example.com  # Replace with your email address
+          to: danielbit114@gmail.com  # Replace with your email address
           from: ${{ secrets.EMAIL_USERNAME }}  # This is the sender's email address (same as the username)
 
       - name: Log Details
