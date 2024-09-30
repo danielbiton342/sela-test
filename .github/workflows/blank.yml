@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Send Email
-        uses: dawidd6/action-send-mail@v3
+        uses: danielbiton342/action-name@v1
         with:
           server_address: smtp.gmail.com  # Email server address (e.g., smtp.gmail.com for Gmail)
           server_port: 465                # Port (for Gmail, use 465 for SSL)
