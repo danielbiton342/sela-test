@@ -1,8 +1,7 @@
 name: Send Email Notification
 
 on:
-  workflow_dispatch:
-
+  workflow_dispatch:  # Allows manual trigger of the workflow
 
 jobs:
   send_email:
@@ -15,10 +14,8 @@ jobs:
       - name: Send Email
         uses: dawidd6/action-send-mail@v3  # Use this action to send the email
         with:
-          server_address: smtp.gmail.com  # SMTP server for Gmail
-          server_port: 465                # Port (use 465 for SSL)
-          username: ${{ secrets.EMAIL_USERNAME }}  # Your email address stored in secrets
-          password: ${{ secrets.EMAIL_PASSWORD }}  # Your email password stored in secrets
+          # Use the connection URL for sending email with secrets stored securely
+          connection_url: ${{ secrets.MAIL_CONNECTION }}
           subject: "Git Push Notification: ${{ github.repository }}"
           body: |
             A new code push was made to the repository:
@@ -28,13 +25,14 @@ jobs:
             - **Commit hash**: ${{ github.sha }}
 
             Check the repository for more details.
-
-          to: danielbit114@gmail.com  # Replace with your email address
-          from: ${{ secrets.EMAIL_USERNAME }}  # This is the sender's email address (same as the username)
+          to: danielbit114@gmail.com  # Your recipient email address
+          from: ${{ secrets.EMAIL_USERNAME }}  # Sender's email address (same as the username)
+         
 
       - name: Log Details
         run: |
           echo "Pushed by: ${{ github.actor }}"
           echo "Repository: ${{ github.repository }}"
           echo "Commit hash: ${{ github.sha }}"
+
 
