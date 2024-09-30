@@ -1,0 +1,39 @@
+name: Send Email Notification
+
+on:
+  push:
+    branches:
+      - main  # or any other branch you want to monitor
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com  # Email server address (e.g., smtp.gmail.com for Gmail)
+          server_port: 465                # Port (for Gmail, use 465 for SSL)
+          username: ${{ secrets.EMAIL_USERNAME }}  # Store your email in GitHub secrets
+          password: ${{ secrets.EMAIL_PASSWORD }}  # Store your email password or an app-specific password in secrets
+          subject: "Git Push Notification: ${{ github.repository }}"
+          body: |
+            A new code push was made to the repository.
+
+            - **Pushed by**: ${{ github.actor }}
+            - **Repository**: ${{ github.repository }}
+            - **Commit hash**: ${{ github.sha }}
+
+            Check the repository for more details.
+
+          to: your-email@example.com  # Your recipient email
+          from: ${{ secrets.EMAIL_USERNAME }}  # Same as the username
+
+      - name: Log the Commit Details
+        run: |
+          echo "Pusher: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Commit: ${{ github.sha }}"
