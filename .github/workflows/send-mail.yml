@@ -16,6 +16,10 @@ jobs:
         with:
           # Use the connection URL for sending email with secrets stored securely
           connection_url: ${{ secrets.MAIL_CONNECTION }}
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: "Git Push Notification: ${{ github.repository }}"
           body: |
             A new code push was made to the repository:
