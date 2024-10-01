@@ -8,31 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # This checks out your repository's code
-
-      - name: Send Email
-        uses: dawidd6/action-send-mail@v3  # Use this action to send the email
+      - name: Send Test Email
+        uses: dawidd6/action-send-mail@v3
         with:
-          # Use the connection URL for sending email with secrets stored securely
           connection_url: ${{ secrets.MAIL_CONNECTION }}
-          subject: "Git Push Notification: ${{ github.repository }}"
-          body: |
-            A new code push was made to the repository:
-
-            - **Pushed by**: ${{ github.actor }}
-            - **Repository**: ${{ github.repository }}
-            - **Commit hash**: ${{ github.sha }}
-
-            Check the repository for more details.
-          to: danielbit114@gmail.com  # Your recipient email address
-          from: ${{ secrets.EMAIL_USERNAME }}  # Sender's email address (same as the username)
-         
-
-      - name: Log Details
-        run: |
-          echo "Pushed by: ${{ github.actor }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Commit hash: ${{ github.sha }}"
-
-
+          subject: "Test Email"
+          body: "This is a test email from GitHub Actions."
+          to: danielbit114@gmail.com
+          from: danielbit114@gmail.com
